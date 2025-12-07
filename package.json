@@ -1,0 +1,14 @@
+{
+  "name": "lightweight-feature-flags",
+  "version": "0.1.0",
+  "description": "A lightweight, self-hosted feature flag library with A/B testing and gradual rollouts.",
+  "main": "src/index.js",
+  "type": "module",
+  "keywords": [
+    "feature-flags",
+    "ab-testing",
+    "rollouts",
+    "self-hosted"
+  ],
+  "license": "MIT"
+}

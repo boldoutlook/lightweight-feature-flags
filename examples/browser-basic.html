@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lightweight Feature Flags Demo</title>
+</head>
+<body>
+  <h1>Lightweight Feature Flags – Browser Demo</h1>
+  <p id="status"></p>
+
+  <script type="module">
+    import { FeatureFlagClient, InMemoryFlagStore } from "../src/index.js";
+
+    const store = new InMemoryFlagStore();
+    const ff = new FeatureFlagClient({ store });
+
+    // Define a demo flag
+    store.upsertFlag("demo-rollout", {
+      enabled: true,
+      description: "50% rollout demo",
+      rollout: {
+        percentage: 50,
+        attribute: "userId",
+      },
+    });
+
+    const randomUserId = "anon-" + Math.floor(Math.random() * 100000);
+    const context = { userId: randomUserId };
+
+    const enabled = ff.isEnabled("demo-rollout", context);
+
+    const p = document.getElementById("status");
+    p.textContent = enabled
+      ? `User ${randomUserId} is IN the demo rollout.`
+      : `User ${randomUserId} is NOT in the demo rollout.`;
+  </script>
+</body>
+</html>
